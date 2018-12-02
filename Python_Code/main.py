@@ -252,8 +252,8 @@ if __name__ == '__main__':
     global sh_metadata
     global EXCEL_BASE_PATH
     global LOG_FILE_PATH
-    EXCEL_BASE_PATH = '/Users/ubuntu/Documents/Excel_Files'
-    LOG_FILE_PATH = '/Users/ubuntu/Documents/Python_Code/'
+    EXCEL_BASE_PATH = '/home/ubuntu/Documents/Excel_Files'
+    LOG_FILE_PATH = '/home/ubuntu/Documents/Python_Code/'
     ap = argparse.ArgumentParser()
     ap.add_argument("-dst", "--DST_Folder", required=True, type=str, help="District Folder Name")
     ap.add_argument("-ac", "--AC_Folder", required=True, type=str, help="Assembly Consistutency Folder Name")
@@ -265,6 +265,7 @@ if __name__ == '__main__':
     if os.path.exists(files_directory):
         print("Folder Exist")
     else:
+        print(files_directory)
         print("Folder Doesn't Exist, Please recheck naming convention")
         sys.exit()
     EXCEL_BASE_PATH = EXCEL_BASE_PATH + "/" + str(args["AC_Folder"]) + ".xlsx"
