@@ -217,8 +217,6 @@ def process_each_image(attr):
                 cv2.imwrite(filename, gray)
                 text = pytesseract.image_to_string(Image.open(filename), lang='hin2+hin')
                 print('pageNumber : ' + str(page_number) + ' position : (' + str(i) + ',' + str(j) + ')')
-                print(text)
-                print('\n')
                 returned_text.append(parse_text(text, position, page_number, anubagg_name, ac_data, ps_data))
     return returned_text
 
@@ -226,7 +224,7 @@ def process_each_image(attr):
 def process_images():
     files_count = count_of_files(IMAGES_DIRECTORY)
     list_of_images = []
-    pool = multiprocessing.Pool(multiprocessing.cpu_count()-1)
+    pool = multiprocessing.Pool(multiprocessing.cpu_count())
     for file_number in range(2, files_count - 1):
         dict_meta = {}
         image_path = IMAGES_DIRECTORY + '/pdf_image-' + str(file_number) + '.jpg'
@@ -248,8 +246,11 @@ def convert_pdf_to_images(pdf_name):
 
 
 def main(pdf_name):
+    print('Deleting Images : ')
     delete_existing_images(IMAGES_DIRECTORY)
+    print('Converting PDF to Images :')
     convert_pdf_to_images(pdf_name)
+    print('Processing Images :')
     process_images()
 
 
